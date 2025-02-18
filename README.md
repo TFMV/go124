@@ -2,6 +2,8 @@
 
 This repository contains a demonstration of new features and improvements introduced in Go 1.24.
 
+The code is intended to be self documenting.
+
 ## Features Demonstrated
 
 - Generic type aliases
