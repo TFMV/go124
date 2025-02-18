@@ -381,6 +381,8 @@ func DemoMaphashComparable() {
 func main() {
 	fmt.Println("=== Go 1.24 Demo ===")
 	demoGenericTypeAlias()
+	fmt.Println("CGO Improvements Demo: Not implemented")
+	DemoFinalizers()
 	DemoCryptoPackages()
 	DemoDirectoryLimitedFS()
 	DemoBytesAndStringsIterators()
@@ -393,6 +395,8 @@ func main() {
 	DemoMathRand()
 	DemoSyncMap()
 	DemoSlog()
+	fmt.Println("Text Template Range Demo: Not implemented") // #16
+	DemoTimeEncoding()
 	DemoSynctest()
 	DemoGoTypesIterators()
 	DemoMaphashComparable()
