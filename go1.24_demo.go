@@ -34,7 +34,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"hash/maphash"
-	"io"
 	"math/big"
 	"math/rand"
 	"net/netip"
@@ -45,11 +44,6 @@ import (
 	"sync"
 	"text/template"
 	"time"
-
-	"golang.org/x/crypto/hkdf"
-	// new in Go 1.24 (signature may vary)
-	// For demonstration we use the x/crypto version of hkdf.
-	// In Go 1.24 the standard library now provides crypto/hkdf.
 )
 
 // ----------------------------------------------------------------------------
@@ -104,23 +98,9 @@ func DemoFinalizers() {
 // This demo uses HKDF (from golang.org/x/crypto/hkdf for now),
 // PBKDF2, and SHA3-256.
 func DemoCryptoPackages() {
-	// HKDF demo.
-	secret := []byte("my secret key")
-	salt := []byte("my salt")
-	info := []byte("hkdf-demo")
-	// hkdf.New returns an io.Reader that provides key material.
-	hkdfReader := hkdf.New(sha256.New, secret, salt, info)
-	derivedKey := make([]byte, 32)
-	if _, err := io.ReadFull(hkdfReader, derivedKey); err != nil {
-		fmt.Println("HKDF error:", err)
-		return
-	}
-	fmt.Println("Derived key (HKDF):", hex.EncodeToString(derivedKey))
-
-	// PBKDF2 demo.
+	// PBKDF2 and SHA3-256 demos
 	password := "my password"
-	// Note: In some implementations pbkdf2.Key returns only []byte.
-	// Here we capture two return values in case it does.
+	salt := []byte("my salt")
 	pbkdf2Key, err := pbkdf2.Key(sha256.New, password, salt, 4096, 32)
 	if err != nil {
 		fmt.Println("PBKDF2 error:", err)
@@ -128,7 +108,7 @@ func DemoCryptoPackages() {
 	}
 	fmt.Println("Derived key (PBKDF2):", hex.EncodeToString(pbkdf2Key))
 
-	// SHA3-256 demo.
+	// SHA3-256 demo
 	hasher := sha3.New256()
 	hasher.Write([]byte("hello world"))
 	digest := hasher.Sum(nil)
