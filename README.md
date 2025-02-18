@@ -36,11 +36,46 @@ To run the demo, simply execute:
 go run go1.24_demo.go
 ```
 
-## Notes
+## Output
 
-- Some features (like testing/synctest) require additional setup or environment variables
-- CGO must be enabled to run the CGO-related demos
-- Some features are best demonstrated in test files or with specific toolchain flags
+The following is a sample output from the demo:
+
+```bash
+=== Go 1.24 Demo ===
+Generic Type Alias (MySlice[int]): [1 2 3 4 5]
+Derived key (HKDF): 283b1390f465a3f0b20cc90fee5c1ef1bf47fcd8393a9315547d1c63911c5b31
+Derived key (PBKDF2): 6e52397ce1f677f36df6fd486bbbd5f611c264951ef1f4ebecaf1140a614d05e
+SHA3-256 digest: 644bcc7e564373040999aac89e7622f3ca71fba1d972fd94a31c3bfbf24e3938
+Files in limited FS:
+ - example.txt
+Iterating over lines (using bytes.Split):
+line1
+line2
+line3
+Iterating over fields (using strings.Fields):
+foo
+bar
+baz
+Encoding append result: demoStruct(123)
+netip.Addr appended text: 192.0.2.1
+Regexp appended text: a*b
+Note: runtime.GOROOT is deprecated; use 'go env GOROOT' instead.
+Template output: Numbers: 1 2 3 4 5 
+big.Int appended text: 12345678901234567890
+Random number (rand.New): 7382721707735833545
+Iterating over sync.Map:
+  key=key1, value=100
+  key=key2, value=200
+slog.DiscardHandler demo: In production, a DiscardHandler would discard logs.
+Experimental synctest demo: See tests built with GOEXPERIMENT=synctest for usage.
+go/types iterator demonstration: Use the Variables() method on tuples, etc.
+Hash for key "myKey": 991567377541123890
+=== Go 1.24 Demo End ===
+```
+
+## Note
+
+Some features are not included in the demo.
 
 ## License
 
